@@ -6,7 +6,7 @@ import contracts from "./config/contracts.json";
 import {formatUnits} from "ethers/lib/utils";
 
 const Test = () => {
-    const {activate, active, library} = useWeb3React();
+    const {activate, active, account, library} = useWeb3React();
     const [balance, setBalance] = useState('0');
     const [address, setAddress] = useState('');
     const [amount, setAmount] = useState('');
@@ -18,13 +18,13 @@ const Test = () => {
                 const provider = new ethers.providers.Web3Provider(library.currentProvider);
                 const signer = provider.getSigner();
                 const TokenContract = new Contract(contracts.token.address, contracts.token.abi, signer);
-                const address = await signer.getAddress();
-                const userBalance = await TokenContract.balanceOf(address);
+                const userBalance = await TokenContract.balanceOf(account);
                 setBalance(formatUnits(userBalance.toString(), 18).toString());
             }
         }
+
         getBalance();
-    }, [active])
+    }, [account])
 
     async function onClickMetamask() {
         try {
@@ -58,7 +58,12 @@ const Test = () => {
                 <div>
                     <span style={{display: 'block', marginBottom: 20}}>Connected</span>
                     <div style={{marginBottom: 20}}>
-                        <span>Balance: {balance}</span>
+                        <span>
+                            Balance: {Number(balance).toLocaleString('en-US', {
+                                style: undefined,
+                                currency: undefined,
+                            })}
+                        </span>
                     </div>
                     <div style={{display: 'flex', flexDirection: 'column', gap: 20}}>
                         <div style={{display: 'flex', gap: 20}}>

@@ -7,10 +7,16 @@ It contains two smart contracts:
 - Test - a basic smart contract that transfers an amount of the ERC20 Token to an address
 
 ## Initial setup
-```shell
-npm i
+Run an npm install in both the root directory and frontend directory
 
-cd frontend
+```shell
+// run in root directory
+
+npm i
+```
+
+```
+// run in frontend directory
 
 npm i
 ```
@@ -19,12 +25,16 @@ npm i
 I've put my private key for my test account in the `hardhat.config.js` feel free to replace this with your test wallet's private key.
 
 ```shell
+// run in root directory
+
 npx hardhat compile
 npm run deploy
 ```
 
 ## Run the frontend
 ```shell
+// run in frontend directory
+
 npm start
 ```
 
